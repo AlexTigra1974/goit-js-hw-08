@@ -1,46 +1,52 @@
-import Player from '@vimeo/player';
-import trhottle from 'lodash.throttle';
+import player from '@vimeo/player';
+import throttle from 'lodash.throttle';
 
-// const player = new Player('handstick', {
-//   id: 19231868,
-//   width: 640,
-// });
+// {
+//   /* <iframe src="https://player.vimeo.com/video/76979871?h=8272103f6e" width="640" height="360" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+
+// <script src="https://player.vimeo.com/api/player.js"></script> */
+// }
+
+const iframe = document.querySelector('iframe');
+console.dir(iframe);
+
+const player = new Vimeo.Player(iframe);
+console.dir(player);
+
+iframe.addEventListener('click', onPlay);
+const onPlay = function (data) {
+  // data is an object containing properties specific to that event
+};
+
+player.on('play', onPlay);
 
 // player.on('play', function () {
 //   console.log('played the video!');
 // });
-// const iframe = document.querySelector('#vimeo-player');
-// console.log(iframe);
-
-// 'videoplayer-current-time';
-// _.throttle(func, [(wait = 0)], [(options = {})]);
-// const iframe = document.querySelector('#vimeo-player');
-
-// localStorage.setItem('notification-level', 'mute');
-// localStorage.setItem('ui-theme', 'dark');
-
-// const theme = localStorage.getItem('ui-theme');
-// console.log(theme); // "dark"
-
-// const save = (key, value) => {
-//   try {
-//     const serializedState = JSON.stringify(value);
-//     localStorage.setItem(key, serializedState);
-//   } catch (error) {
-//     console.error('Set state error: ', error.message);
-//   }
+// const onPlay = function (data) {
+//   // data is an object containing properties specific to that event
 // };
 
-// const load = key => {
-//   try {
-//     const serializedState = localStorage.getItem(key);
-//     return serializedState === null ? undefined : JSON.parse(serializedState);
-//   } catch (error) {
-//     console.error('Get state error: ', error.message);
-//   }
-// };
+// player.on('play', onPlay);
 
-// export default {
-//   save,
-//   load,
-// };
+// // If later on you decide that you don’t need to listen for play anymore.
+// player.off('play', onPlay);
+
+// // Alternatively, `off` can be called with just the event name to remove all
+// // listeners.
+// player.off('play');
+
+player.getVideoTitle().then(function (title) {
+  console.log('title:', title);
+});
+player
+  .getCurrentTime()
+  .then(function (seconds) {
+    // seconds = the current playback position
+  })
+  .catch(function (error) {
+    // an error occurred
+  });
+const KEY_TIME = currentTime.seconds;
+localStorage.setItem(KEY_TIME);
+const time = localStorage.getItem(KEY_TIME);

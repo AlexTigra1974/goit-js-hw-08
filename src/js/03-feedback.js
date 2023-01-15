@@ -1,17 +1,36 @@
-// const form = document.querySelector('#message-form');
-// const output = document.querySelector('#output');
-// const LOCALSTORAGE_KEY = 'goit-example-message';
+import throttle from 'lodash.throttle';
 
-// updateOutput();
-// form.addEventListener('submit', saveMessage);
+const STORAGE_KEY = 'feedback-form-state';
+let formData = {};
 
-// function saveMessage(evt) {
-//   evt.preventDefault();
-//   localStorage.setItem(LOCALSTORAGE_KEY, form.elements.message.value);
-//   updateOutput();
-//   form.reset();
-// }
+const form = document.querySelector('.feedback-form');
+console.dir(form);
 
-// function updateOutput() {
-//   output.textContent = localStorage.getItem(LOCALSTORAGE_KEY) || '';
-// }
+form.addEventListener('submit', onFormSubmit);
+form.addEventListener('input', throttle(onFormInput, 500));
+
+populateForm();
+
+function onFormSubmit(e) {
+  e.preventDefault();
+  e.currentTarget.reset();
+
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+function onFormInput(e) {
+  formData[e.target.name] = e.target.value;
+  console.log(formData);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+}
+
+function populateForm() {
+  if (localStorage.getItem(STORAGE_KEY));
+
+  formData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  //console.log(form.elements);
+  // form.elements[name]
+  for (const key in formData) {
+    form.elements[key].value = formData[key];
+  }
+}

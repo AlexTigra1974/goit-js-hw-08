@@ -14,6 +14,12 @@ populateForm();
 
 function onFormSubmit(e) {
   e.preventDefault();
+
+  const { email, message } = e.currentTarget;
+  if (!email.value || !message.value) {
+    alert('Всі поля повинні бути заповнені!');
+  }
+
   e.currentTarget.reset();
 
   localStorage.removeItem(STORAGE_KEY);

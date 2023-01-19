@@ -5,7 +5,6 @@ console.dir(form);
 
 const STORAGE_KEY = 'feedback-form-state';
 let formData = {};
-console.log(formData);
 
 form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onFormInput, 500));
@@ -22,7 +21,10 @@ function onFormSubmit(e) {
 
   e.currentTarget.reset();
 
+  console.log(formData);
+
   localStorage.removeItem(STORAGE_KEY);
+  formData = {};
 }
 
 function onFormInput(e) {

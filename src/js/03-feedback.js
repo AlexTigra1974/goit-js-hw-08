@@ -29,15 +29,17 @@ function onFormInput(e) {
   // console.log(e.target.name);
   // console.log(e.target.value);
   formData[e.target.name] = e.target.value;
-  console.log(formData);
+  // console.log(formData);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 function populateForm() {
   if (localStorage.getItem(STORAGE_KEY));
 
-  formData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  //console.log(form.elements);
+  {
+    formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    console.log(form.elements);
+  }
   // form.elements[name]
   for (const key in formData) {
     form.elements[key].value = formData[key];
